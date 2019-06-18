@@ -19,18 +19,19 @@ router.post("/register", (req, res) => {
         return res.status(400).json(errors);
     }
 
-    // check username
-    User.findOne({ username: req.body.username }).then(user => {
+    User.findOne({
+        $or: [{ email: req.body.email }, { username: req.body.username }]
+    }).then(user => {
         if (user) {
-            return res
-                .status(400)
-                .json({ username: "Username already exists" });
-        }
-    });
-
-    User.findOne({ email: req.body.email }).then(user => {
-        if (user) {
-            return res.status(400).json({ email: "Email already exists" });
+            if (user.username === req.body.username) {
+                return res.status(400).json({
+                    username: "username already exists"
+                });
+            } else if (user.email === req.body.email) {
+                return res.status(400).json({
+                    email: "email already exists"
+                });
+            }
         } else {
             const newUser = new User({
                 firstName: req.body.firstName,
