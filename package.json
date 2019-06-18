@@ -1,0 +1,35 @@
+{
+  "name": "matcha",
+  "version": "1.0.0",
+  "description": "A dating website",
+  "main": "./app/server/server.js",
+  "scripts": {
+    "start": "node ./app/server/server.js",
+    "server": "nodemon ./app/server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mauricechristopher/Matcha.git"
+  },
+  "author": "mchristo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mauricechristopher/Matcha/issues"
+  },
+  "homepage": "https://github.com/mauricechristopher/Matcha#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.0",
+    "express": "^4.17.1",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^11.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
