@@ -40,6 +40,14 @@ export const Button = styled.button`
 `;
 
 class WelcomeBody extends React.Component {
+    // ### Need to prevent access to this page if logged in
+    // componentDidMount() {
+    //     // If logged in and user navigates to Register page, should redirect them to dashboard
+    //     if (this.state.auth.isAuthenticated) {
+    //         this.state.history.push("/dashboard");
+    //     }
+    // }
+
     render() {
         return (
             <StyledWelcomeBody>

@@ -1,7 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/authActions";
+import classnames from "classnames";
+
 import { NavbarWrapper, Title } from "../Header/Navbar";
 import { Button, StyledWelcomeBody } from "../WelcomePage/WelcomeBody";
-
 import { Input, LoginFormDiv, InputDiv } from "./FormStyles";
 
 class Login extends React.Component {
@@ -13,9 +17,29 @@ class Login extends React.Component {
             errors: {}
         };
     }
+
+    componentDidMount() {
+        // If logged in and user navigates to Login page, should redirect them to dashboard
+        if (this.props.auth.isAuthenticated) {
+            this.props.history.push("/dashboard");
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.auth.isAuthenticated) {
+            this.props.history.push("/dashboard"); // push user to dashboard when they login
+        }
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
+    }
+
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
+
     onSubmit = e => {
         e.preventDefault();
         const userData = {
@@ -23,7 +47,9 @@ class Login extends React.Component {
             password: this.state.password
         };
         console.log(userData);
+        this.props.loginUser(userData);
     };
+
     render() {
         const { errors } = this.state;
 
@@ -34,6 +60,7 @@ class Login extends React.Component {
                         <h1>Login</h1>
                     </Title>
                 </NavbarWrapper>
+
                 <StyledWelcomeBody>
                     <LoginFormDiv>
                         <form noValidate onSubmit={this.onSubmit}>
@@ -45,8 +72,17 @@ class Login extends React.Component {
                                     placeholder="Email"
                                     id="email"
                                     type="email"
+                                    className={classnames("", {
+                                        invalid:
+                                            errors.email || errors.emailnotfound
+                                    })}
                                 />
+                                <span className="red-text">
+                                    {errors.email}
+                                    {errors.emailnotfound}
+                                </span>
                             </InputDiv>
+
                             <InputDiv>
                                 <Input
                                     onChange={this.onChange}
@@ -55,8 +91,18 @@ class Login extends React.Component {
                                     placeholder="Password"
                                     id="password"
                                     type="password"
+                                    className={classnames("", {
+                                        invalid:
+                                            errors.password ||
+                                            errors.passwordincorrect
+                                    })}
                                 />
+                                <span className="red-text">
+                                    {errors.password}
+                                    {errors.passwordincorrect}
+                                </span>
                             </InputDiv>
+
                             <InputDiv>
                                 <Button type="submit">Login</Button>
                             </InputDiv>
@@ -68,4 +114,16 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+Login.propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+});
+export default connect(
+    mapStateToProps,
+    { loginUser }
+)(Login);
