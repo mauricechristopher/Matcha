@@ -4,9 +4,13 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
 
-import { NavbarWrapper, Title } from "../Header/Navbar";
-import { Button, StyledWelcomeBody } from "../WelcomePage/WelcomeBody";
-import { Input, LoginFormDiv, InputDiv } from "./FormStyles";
+import { NavbarWrapper, Title } from "../../styles/NavStyles/Navbar.jsx";
+import { Button, StyledWelcomeBody } from "../../styles/CoreStyles/Theme";
+import {
+    Input,
+    LoginFormDiv,
+    InputDiv
+} from "../../styles/FormStyles/FormStyles";
 
 class Login extends React.Component {
     constructor() {

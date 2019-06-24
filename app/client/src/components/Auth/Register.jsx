@@ -5,9 +5,15 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 
-import { NavbarWrapper, Title } from "../Header/Navbar";
-import { Button, StyledWelcomeBody } from "../WelcomePage/WelcomeBody";
-import { FormDiv, NameDiv, Input, NameInputDiv, InputDiv } from "./FormStyles";
+import { NavbarWrapper, Title } from "../../styles/NavStyles/Navbar.jsx";
+import { Button, StyledWelcomeBody } from "../../styles/CoreStyles/Theme";
+import {
+    FormDiv,
+    NameDiv,
+    Input,
+    NameInputDiv,
+    InputDiv
+} from "../../styles/FormStyles/FormStyles";
 
 class Register extends React.Component {
     constructor() {

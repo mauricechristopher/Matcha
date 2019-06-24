@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { NavbarWrapper, Title } from "../Header/Navbar";
-import { Button, StyledWelcomeBody } from "../WelcomePage/WelcomeBody";
+import { NavbarWrapper, Title } from "../../styles/NavStyles/Navbar.jsx";
+import { Button, StyledWelcomeBody } from "../../styles/CoreStyles/Theme";
 import { logoutUser } from "../../actions/authActions";
-import { WelcomeDiv } from "./DashStyles";
+import {
+    WelcomeDiv,
+    WelcomeText,
+    WelcomeTitle,
+    GetStartedButton
+} from "../../styles/DashStyles/DashStyles";
 
 class Dashboard extends Component {
     onLogoutClick = e => {
@@ -21,20 +26,22 @@ class Dashboard extends Component {
             <div>
                 <NavbarWrapper>
                     <Title to="/">
-                        <h1>Login</h1>
+                        <h1>Matcha</h1>
                     </Title>
+
+                    <Button onClick={this.onLogoutClick}>
+                        Click here to logout
+                    </Button>
                 </NavbarWrapper>
 
                 <StyledWelcomeBody>
                     <WelcomeDiv>
-                        <h1>Hello, {user.firstName}. Welcome to Matcha</h1>
-                        <p>Click below to get started</p>
+                        <WelcomeTitle>Hello, {user.firstName}</WelcomeTitle>
+                        <WelcomeText>Welcome to Matcha</WelcomeText>
+                        <GetStartedButton>
+                            Click here to get started
+                        </GetStartedButton>
                     </WelcomeDiv>
-
-                    <Button>Click here to get started</Button>
-                    <Button onClick={this.onLogoutClick}>
-                        Click here to logout
-                    </Button>
                 </StyledWelcomeBody>
             </div>
         );
